@@ -7,11 +7,19 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArcadeElevator;
+import frc.robot.commands.IntakeObject;
 import frc.robot.commands.MoveForTime;
+import frc.robot.commands.OutakeObject;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Intake;
+
+import javax.sound.sampled.Port;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 
@@ -23,11 +31,20 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+  private Joystick m_joystick = new Joystick(0);
+  private JoystickButton m_intakeButton = new JoystickButton(m_joystick, 7);
+  private JoystickButton m_outakeButton = new JoystickButton(m_joystick, 8);
   private Drivetrain m_drivetrain = new Drivetrain();
-  private ArcadeDrive m_arcadeDrive = new ArcadeDrive(drivetrain, joystick);
-  private ArcadeElevator m_Elevator = new ArcadeElevator(null, null)
+  private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_drivetrain, m_joystick);
+  
+  private Elevator m_elevator = new Elevator();
+  
+  private ArcadeElevator m_arcadeElevator = new ArcadeElevator(m_joystick, m_elevator);
   private MoveForTime moveForTime = new MoveForTime (m_drivetrain, 0.1, 4);
-  private Intake m_intakeMotor = new Intake (Intake, speed);
+  
+  private Intake m_intakeMotor = new Intake();
+  private IntakeObject m_intakeObject = new IntakeObject(m_intakeMotor,0);
+  private OutakeObject m_outakeObject = new OutakeObject(m_intakeMotor,0);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -51,20 +68,23 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-     
-    
-    public Command getTeleopCommand(){
+    m_intakeButton.onTrue(m_intakeObject);
+    m_outakeButton.onTrue(m_outakeObject);
+  }
+
+  public Command getTeleopCommand(){
     m_drivetrain.setDefaultCommand(m_arcadeDrive);
+    m_elevator.setDefaultCommand(m_arcadeElevator);
     return null;
-}
-public Command getAutonomousCommand(){
-    return moveForTime;
-}
+  }
+  public Command getAutonomousCommand(){
+      return moveForTime;
+  }
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
   
-  }
+  
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
