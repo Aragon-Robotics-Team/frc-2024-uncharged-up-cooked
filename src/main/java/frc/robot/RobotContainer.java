@@ -5,9 +5,15 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.ArcadeElevator;
+import frc.robot.commands.MoveForTime;
+import frc.robot.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -17,10 +23,14 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+  private Drivetrain m_drivetrain = new Drivetrain();
+  private ArcadeDrive m_arcadeDrive = new ArcadeDrive(drivetrain, joystick);
+  private ArcadeElevator m_Elevator = new ArcadeElevator(null, null)
+  private MoveForTime moveForTime = new MoveForTime (m_drivetrain, 0.1, 4);
+  private Intake m_intakeMotor = new Intake (Intake, speed);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -28,6 +38,8 @@ public class RobotContainer {
     configureBindings();
   }
 
+
+  
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -39,7 +51,15 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
+     
     
+    public Command getTeleopCommand(){
+    m_drivetrain.setDefaultCommand(m_arcadeDrive);
+    return null;
+}
+public Command getAutonomousCommand(){
+    return moveForTime;
+}
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
