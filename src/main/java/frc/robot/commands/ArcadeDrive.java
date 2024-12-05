@@ -27,8 +27,9 @@ public class ArcadeDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = m_joystick.getRawAxis(3); 
-    double turnSpeed = m_joystick.getRawAxis(2);
+    double kConstant = 0.2;
+    double speed = m_joystick.getRawAxis(1)*kConstant; 
+    double turnSpeed = -m_joystick.getRawAxis(4)*kConstant;
 m_drivetrain.setLeftSpeed(speed + turnSpeed);
 m_drivetrain.setRightSpeed(speed - turnSpeed);
    }

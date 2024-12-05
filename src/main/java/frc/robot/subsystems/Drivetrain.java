@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
@@ -12,15 +11,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
    //The device Id may need to be changed
-    private TalonFX m_rightPrimary = new TalonFX(0);
-    private TalonFX m_leftPrimary = new TalonFX(2);
+    private TalonFX m_rightPrimary = new TalonFX(1);
+    private TalonFX m_leftPrimary = new TalonFX(3);
 //-->Why are we initializing the follower under class? Isn't follower the same as Secondary?
 // 1. code goes in a class. if not in a class, it doesn't do anything. 2. a follower is an object that takes in both motors and makes one follow the other. secondary motor name is just for distinguishing between motors
   /** Creates a new Drivetrain. */
   public Drivetrain() {}
 
   public void setRightSpeed(double speed){
-  m_rightPrimary.set(speed);
+  m_rightPrimary.set(-speed);
   }
   public void setLeftSpeed(double speed){
   m_leftPrimary.set(speed);

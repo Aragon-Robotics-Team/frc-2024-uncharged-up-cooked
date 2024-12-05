@@ -20,14 +20,17 @@ public class MoveForTime extends Command {
     m_speed = speed;
     m_timeInSeconds = seconds;
     m_timer = new Timer();
+    addRequirements(drivetrain);
+
   }
   
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_startTimer = m_timer.get();
     m_timer.reset();
     m_timer.start();
+    m_startTimer = m_timer.get();
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -37,14 +37,14 @@ public class RobotContainer {
   private Drivetrain m_drivetrain = new Drivetrain();
   private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_drivetrain, m_joystick);
   
-  private Elevator m_elevator = new Elevator();
+  //private Elevator m_elevator = new Elevator();
   
-  private ArcadeElevator m_arcadeElevator = new ArcadeElevator(m_joystick, m_elevator);
+  //private ArcadeElevator m_arcadeElevator = new ArcadeElevator(m_joystick, m_elevator);
   private MoveForTime moveForTime = new MoveForTime (m_drivetrain, 0.1, 4);
   
-  private Intake m_intakeMotor = new Intake();
-  private IntakeObject m_intakeObject = new IntakeObject(m_intakeMotor,0);
-  private OutakeObject m_outakeObject = new OutakeObject(m_intakeMotor,0);
+  //private Intake m_intakeMotor = new Intake();
+  //private IntakeObject m_intakeObject = new IntakeObject(m_intakeMotor,0);
+  //private OutakeObject m_outakeObject = new OutakeObject(m_intakeMotor,0);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -68,13 +68,13 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    m_intakeButton.onTrue(m_intakeObject);
-    m_outakeButton.onTrue(m_outakeObject);
+   // m_intakeButton.onTrue(m_intakeObject);
+    //m_outakeButton.onTrue(m_outakeObject);
   }
 
   public Command getTeleopCommand(){
     m_drivetrain.setDefaultCommand(m_arcadeDrive);
-    m_elevator.setDefaultCommand(m_arcadeElevator);
+    //m_elevator.setDefaultCommand(m_arcadeElevator);
     return null;
   }
   public Command getAutonomousCommand(){
