@@ -29,7 +29,7 @@ public class OutakeObject extends Command {
   public void initialize() {
     m_OutakeMotor.setIntakeSpeed(0);
 
-
+    
   }
 
 
